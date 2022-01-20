@@ -72,24 +72,45 @@ const playRound = (playerSelection, computerSelection) => {
       const { user, computer, out, score } = conditions[res];
       return {
         score: score,
-        message: out
+        message: out,
       };
     }
   }
 };
 
-const game = () => {
-  let gameCount = 0;
-  let currentScore = 0;
-  do {
-    let choice = prompt('choice:');
-    let { score, message } = playRound(choice, computerPlay());
-    currentScore += score;
-    console.log(message);
-    gameCount++;
-  } while (gameCount < 5);
 
-  console.log(currentScore);
+const game = () => {
+  const btnRock = document.querySelector("#rock");
+  const btnPaper = document.querySelector("#paper");
+  const btnScissors = document.querySelector("#scissors");
+  const resultBox = document.querySelector("#result");
+  const scoreBox = document.querySelector('#score');
+
+  let currentScore = 0;
+
+
+  btnRock.addEventListener("click", () => {
+    let { score, message } = playRound("rock", computerPlay());
+    currentScore += score;
+    resultBox.textContent = message;
+    scoreBox.textContent = currentScore;
+    if (currentScore >= 5) resultBox.textContent = "Winner, Winner! Chicken Dinner!" 
+  });
+  btnPaper.addEventListener("click", () => {
+    let { score, message } = playRound("paper", computerPlay());
+    currentScore += score;
+    resultBox.textContent = message;
+    scoreBox.textContent = currentScore;
+    if (currentScore >= 5) resultBox.textContent = "Winner, Winner! Chicken Dinner!" 
+  });
+  btnScissors.addEventListener("click", () => {
+    let { score, message } = playRound("scissors", computerPlay());
+    currentScore += score;
+    resultBox.textContent = message;
+    scoreBox.textContent = currentScore;
+    if (currentScore >= 5) resultBox.textContent = "Winner, Winner! Chicken Dinner!" 
+  });
+
 };
 
 game();
